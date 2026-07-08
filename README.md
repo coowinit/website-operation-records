@@ -41,6 +41,8 @@ website-work-record-v1.0.0/
 ├── js/
 │   ├── records-data.js
 │   └── app.js
+├── backups/
+│   └── .gitkeep
 └── README.md
 ```
 
@@ -189,7 +191,9 @@ cloudFile: {
 }
 ```
 
-## 导入与导出备份
+## 导入、导出与备份存放建议
+
+页面支持通过 JSON 文件进行数据备份和恢复。由于页面中的新增、编辑、删除记录默认保存到当前浏览器本地，所以 **导出备份是非常重要的操作**。
 
 ### 导出备份
 
@@ -199,13 +203,76 @@ cloudFile: {
 website-work-record-backup-202607081130.json
 ```
 
-建议每次完成重要记录更新后导出一份备份。
+建议每次完成重要记录更新后，都导出一份备份文件。
+
+### 备份文件建议放哪里
+
+日常导出的 JSON 备份文件，建议统一放到项目中的 `backups/` 目录：
+
+```text
+website-work-record-v1.0.0/
+├── backups/
+│   ├── 2026-07-08-operation-records.json
+│   ├── 2026-07-15-operation-records.json
+│   └── 2026-07-31-operation-records.json
+```
+
+推荐命名格式：
+
+```text
+YYYY-MM-DD-operation-records.json
+```
+
+如果一天导出多次，可以加上时间：
+
+```text
+YYYY-MM-DD-HHMM-operation-records.json
+```
+
+例如：
+
+```text
+2026-07-08-1530-operation-records.json
+```
+
+### 正式版本压缩包放哪里
+
+项目正式版本的压缩包，例如：
+
+```text
+website-work-record-v1.0.0.zip
+```
+
+建议放到 GitHub 的 **Release 附件** 中，不一定放到项目目录里。
+
+这样可以区分：
+
+| 文件类型 | 建议位置 | 说明 |
+|---|---|---|
+| 日常 JSON 数据备份 | `backups/` | 用于恢复页面记录数据 |
+| 正式版本 ZIP 压缩包 | GitHub Release 附件 | 用于归档完整版本 |
+| 页面源代码 | 仓库主目录 | 用于维护系统页面 |
+| 默认模板数据 | `js/records-data.js` | 用于初始化表格结构和默认记录 |
+
+### 公开仓库注意事项
+
+如果仓库是公开的，真实工作记录、内部网站名称、云文件链接、服务器信息等内容不建议直接上传。
+
+可以采用这种方式：
+
+```text
+backups/
+├── example-operation-records.json    # 示例备份，可以上传
+└── private/                          # 真实备份，建议本地或云盘保存，不上传
+```
+
+如果是公司内部仓库或私人仓库，可以把真实 JSON 备份文件直接放到 `backups/` 目录中。
 
 ### 导入备份
 
 点击页面中的 **“导入备份”**，选择之前导出的 JSON 文件即可恢复数据。
 
-导入后，数据会保存到当前浏览器本地。
+导入后，数据会保存到当前浏览器本地。建议导入确认无误后，再重新导出一份最新备份。
 
 ## 版本说明
 
