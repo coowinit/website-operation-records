@@ -1,0 +1,217 @@
+/*
+  网站运维工作记录表数据文件
+  ------------------------------------------------------------
+  维护方式：
+  1. 新增记录：可以在页面上点击“新增记录”，也可以直接修改本文件 rows。
+  2. 新增列：在 columns 中新增 { key: "字段名", label: "表头名称" }，再在 rows 中按需补充对应字段。
+  3. 删除列：从 columns 中删除对应字段即可，rows 中保留旧字段也不会显示。
+  4. 调整列顺序：直接调整 columns 数组中的顺序。
+  5. 新增表格：复制 table05，改名为 table06，并修改 title、description、columns、rows。
+*/
+
+window.recordsData = {
+  table01: {
+    title: "网站安全巡检表",
+    menuTitle: "网站安全巡检表",
+    description: "记录管理员账号、插件主题、文件权限、SSL、异常文件和安全扫描等巡检事项。",
+    note: "本表只保留基础索引信息，巡检详情、截图、报告和处理说明统一放到云文件中。",
+    columns: [
+      { key: "recordId", label: "记录编号" },
+      { key: "date", label: "巡检日期" },
+      { key: "site", label: "网站名称" },
+      { key: "item", label: "检查项目" },
+      { key: "cloudFile", label: "云文件", type: "link" }
+    ],
+    rows: [
+      {
+        recordId: "SEC-2026-07-001",
+        date: "2026-07-__",
+        site: "英文官网",
+        item: "管理员账号、插件、主题、SSL、文件权限",
+        cloudFile: { text: "查看详情", url: "#" }
+      },
+      {
+        recordId: "SEC-2026-07-002",
+        date: "2026-07-__",
+        site: "小语种站点",
+        item: "异常文件、插件版本、后台账号",
+        cloudFile: { text: "查看详情", url: "#" }
+      },
+      {
+        recordId: "SEC-2026-08-001",
+        date: "2026-08-__",
+        site: "核心网站",
+        item: "账号、插件、主题、权限、日志",
+        cloudFile: { text: "查看详情", url: "#" }
+      }
+    ]
+  },
+
+  table02: {
+    title: "网站备份清单",
+    menuTitle: "网站备份清单",
+    description: "记录网站文件、数据库、迁移前备份、月度备份等备份事项。",
+    note: "本表只记录备份索引，备份文件位置说明、截图和备份详情统一放到云文件中。",
+    columns: [
+      { key: "recordId", label: "记录编号" },
+      { key: "date", label: "备份日期" },
+      { key: "site", label: "网站名称" },
+      { key: "backupType", label: "备份类型" },
+      { key: "backupScope", label: "备份范围" },
+      { key: "backupLocation", label: "备份位置" },
+      { key: "cloudFile", label: "云文件", type: "link" }
+    ],
+    rows: [
+      {
+        recordId: "BAK-2026-07-001",
+        date: "2026-07-__",
+        site: "英文官网",
+        backupType: "全站备份",
+        backupScope: "网站文件 + 数据库",
+        backupLocation: "SiteGround / 本地 / 云盘",
+        cloudFile: { text: "查看详情", url: "#" }
+      },
+      {
+        recordId: "BAK-2026-07-002",
+        date: "2026-07-__",
+        site: "小语种站点",
+        backupType: "迁移前备份",
+        backupScope: "网站文件 + 数据库",
+        backupLocation: "SiteGround / 本地 / 云盘",
+        cloudFile: { text: "查看详情", url: "#" }
+      },
+      {
+        recordId: "BAK-2026-08-001",
+        date: "2026-08-__",
+        site: "核心网站",
+        backupType: "数据库备份",
+        backupScope: "数据库",
+        backupLocation: "SiteGround / 本地 / 云盘",
+        cloudFile: { text: "查看详情", url: "#" }
+      }
+    ]
+  },
+
+  table03: {
+    title: "询盘链路异常排查清单",
+    menuTitle: "询盘链路异常排查清单",
+    description: "记录表单提交、邮件接收、通知转发、代理商分发等询盘链路异常排查。",
+    note: "本表只保留异常索引，测试截图、邮件截图、日志和排查过程统一放到云文件中。",
+    columns: [
+      { key: "recordId", label: "记录编号" },
+      { key: "date", label: "发现日期" },
+      { key: "page", label: "网站/页面" },
+      { key: "step", label: "异常环节" },
+      { key: "summary", label: "异常描述" },
+      { key: "cloudFile", label: "云文件", type: "link" }
+    ],
+    rows: [
+      {
+        recordId: "INQ-2026-07-001",
+        date: "2026-07-__",
+        page: "英文官网 / 联系我们",
+        step: "表单提交",
+        summary: "提交后未收到邮件或通知延迟",
+        cloudFile: { text: "查看详情", url: "#" }
+      },
+      {
+        recordId: "INQ-2026-07-002",
+        date: "2026-07-__",
+        page: "产品详情页",
+        step: "邮件接收",
+        summary: "测试询盘邮件进入垃圾箱或未送达",
+        cloudFile: { text: "查看详情", url: "#" }
+      },
+      {
+        recordId: "INQ-2026-08-001",
+        date: "2026-08-__",
+        page: "小语种站点",
+        step: "地区分发",
+        summary: "代理商通知或转发路径需确认",
+        cloudFile: { text: "查看详情", url: "#" }
+      }
+    ]
+  },
+
+  table04: {
+    title: "核心网站更新留痕表",
+    menuTitle: "核心网站更新留痕表",
+    description: "记录核心网站页面、Banner、产品资料、PDF、视频链接、表单和功能更新。",
+    note: "本表只记录更新索引，更新前后截图、需求说明和确认记录统一放到云文件中。",
+    columns: [
+      { key: "recordId", label: "记录编号" },
+      { key: "date", label: "更新日期" },
+      { key: "site", label: "网站名称" },
+      { key: "position", label: "更新位置" },
+      { key: "content", label: "更新内容" },
+      { key: "cloudFile", label: "云文件", type: "link" }
+    ],
+    rows: [
+      {
+        recordId: "UPD-2026-07-001",
+        date: "2026-07-__",
+        site: "英文官网",
+        position: "首页 Banner",
+        content: "替换图片、标题或按钮链接",
+        cloudFile: { text: "查看详情", url: "#" }
+      },
+      {
+        recordId: "UPD-2026-07-002",
+        date: "2026-07-__",
+        site: "核心网站",
+        position: "产品详情页",
+        content: "更新产品参数、PDF或视频链接",
+        cloudFile: { text: "查看详情", url: "#" }
+      },
+      {
+        recordId: "UPD-2026-08-001",
+        date: "2026-08-__",
+        site: "小语种站点",
+        position: "表单 / 下载资料",
+        content: "修改表单字段或下载文件",
+        cloudFile: { text: "查看详情", url: "#" }
+      }
+    ]
+  },
+
+  table05: {
+    title: "SEO巡检及整改记录表",
+    menuTitle: "SEO巡检及整改记录表",
+    description: "记录 404、重定向、标题描述、索引状态、站点地图、页面速度等 SEO 巡检与整改。",
+    note: "本表只保留 SEO 问题索引，Search Console 截图、检测工具截图和整改详情统一放到云文件中。",
+    columns: [
+      { key: "recordId", label: "记录编号" },
+      { key: "date", label: "巡检日期" },
+      { key: "page", label: "网站/页面" },
+      { key: "issueType", label: "问题类型" },
+      { key: "summary", label: "问题描述" },
+      { key: "cloudFile", label: "云文件", type: "link" }
+    ],
+    rows: [
+      {
+        recordId: "SEO-2026-07-001",
+        date: "2026-07-__",
+        page: "英文官网",
+        issueType: "404 / 死链",
+        summary: "发现无效链接或旧页面未正确跳转",
+        cloudFile: { text: "查看详情", url: "#" }
+      },
+      {
+        recordId: "SEO-2026-07-002",
+        date: "2026-07-__",
+        page: "核心产品页",
+        issueType: "标题 / 描述",
+        summary: "页面标题、描述或 H 标签需要调整",
+        cloudFile: { text: "查看详情", url: "#" }
+      },
+      {
+        recordId: "SEO-2026-08-001",
+        date: "2026-08-__",
+        page: "小语种站点",
+        issueType: "站点地图 / 索引",
+        summary: "站点地图、robots 或索引状态需复查",
+        cloudFile: { text: "查看详情", url: "#" }
+      }
+    ]
+  }
+};
