@@ -1,0 +1,5 @@
+# 禁止直接访问服务器端 JSON 备份文件。
+# 如需下载，请通过 api/records.php?action=download_backup&filename=xxx.json 操作。
+<Files "*.json">
+  Require all denied
+</Files>

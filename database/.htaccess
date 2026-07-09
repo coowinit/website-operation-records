@@ -1,0 +1,4 @@
+# 禁止直接访问 SQLite 数据库文件和数据库相关文件
+<FilesMatch "\.(sqlite|sqlite3|db|sql)$">
+  Require all denied
+</FilesMatch>

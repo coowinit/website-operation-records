@@ -656,3 +656,247 @@ h1 {
     padding: 16px;
   }
 }
+
+/* v1.2.1：PHP + SQLite 接口状态提示 */
+.api-status {
+  margin: 0 0 14px;
+  padding: 10px 13px;
+  border-radius: 11px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: #f8fafc;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.api-status.loading {
+  color: #4b5563;
+  background: #f8fafc;
+}
+
+.api-status.ok {
+  color: #027a48;
+  background: #ecfdf3;
+  border-color: rgba(2, 122, 72, 0.18);
+}
+
+.api-status.error {
+  color: var(--red);
+  background: var(--red-soft);
+  border-color: rgba(180, 35, 24, 0.18);
+}
+
+.action-btn:disabled,
+.action-btn[disabled] {
+  opacity: 0.58;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* v1.2.1：服务器端备份管理 */
+.backup-panel {
+  margin: 0 0 14px;
+  padding: 14px;
+  border: 1px solid rgba(122, 53, 168, 0.16);
+  border-radius: 14px;
+  background: #fcfaff;
+}
+
+.backup-panel[hidden] {
+  display: none;
+}
+
+.backup-panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.backup-panel-head strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--purple);
+}
+
+.backup-panel-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.backup-list {
+  display: grid;
+  gap: 8px;
+}
+
+.backup-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.backup-info {
+  min-width: 0;
+}
+
+.backup-info strong {
+  display: block;
+  color: #344054;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.backup-info span {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.backup-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.backup-actions .mini-btn {
+  margin: 0;
+  text-decoration: none;
+}
+
+.backup-empty {
+  padding: 13px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  color: var(--muted);
+  background: #fff;
+  font-size: 13px;
+}
+
+.error-text {
+  color: var(--red);
+}
+
+@media (max-width: 760px) {
+  .backup-panel-head,
+  .backup-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .backup-actions {
+    flex-wrap: wrap;
+  }
+}
+
+
+/* v1.2.1：数据管理入口集中化 */
+.data-manager-menu {
+  border-color: rgba(122, 53, 168, 0.24);
+  background: linear-gradient(180deg, #fff, #fbf7ff);
+}
+
+.data-manager-menu .record-card-index {
+  color: #fff;
+  background: #173a63;
+}
+
+.data-manager-menu.active {
+  background: linear-gradient(135deg, #173a63, var(--purple));
+}
+
+.data-manager-panel {
+  margin: 0 0 14px;
+  display: grid;
+  gap: 14px;
+}
+
+.data-manager-panel[hidden] {
+  display: none;
+}
+
+.data-manager-intro {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: stretch;
+  padding: 18px;
+  border: 1px solid rgba(122, 53, 168, 0.16);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ffffff, #fbf7ff);
+}
+
+.data-manager-intro h3 {
+  margin-bottom: 6px;
+  font-size: 22px;
+}
+
+.data-manager-intro p:last-child {
+  max-width: 900px;
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.data-manager-badge {
+  flex: 0 0 150px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--purple-2), #173a63);
+}
+
+.data-manager-badge span {
+  font-size: 12px;
+  opacity: 0.78;
+}
+
+.data-manager-badge strong {
+  margin-top: 3px;
+  font-size: 16px;
+}
+
+.data-manager-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.data-manager-warning {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px dashed rgba(180, 35, 24, 0.22);
+  color: #7a271a;
+  background: #fff7ed;
+  font-size: 14px;
+}
+
+@media (max-width: 760px) {
+  .data-manager-intro {
+    flex-direction: column;
+  }
+
+  .data-manager-badge {
+    flex: 0 0 auto;
+    min-height: 72px;
+  }
+
+  .data-manager-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

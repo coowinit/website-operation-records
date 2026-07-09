@@ -10,13 +10,13 @@
   <header class="page-hero">
     <div class="hero-inner">
       <div>
-        <p class="eyebrow">Website Operation Records · v1.0.0</p>
+        <p class="eyebrow">Website Operation Records · v1.2.1</p>
         <h1>网站运维工作记录表</h1>
-        <p class="hero-desc">用于记录网站安全巡检、网站备份、询盘链路排查、核心网站更新和 SEO 巡检整改。日常可在页面中新增、编辑、删除记录；重要修改后请导出 JSON 备份。</p>
+        <p class="hero-desc">用于记录网站安全巡检、网站备份、询盘链路排查、核心网站更新和 SEO 巡检整改。当前版本已接入 PHP + SQLite，日常新增、编辑、删除会保存到服务器数据库；备份、导入、导出、恢复默认模板已统一集中到「数据管理」入口，业务表页面只负责记录新增、编辑和删除。</p>
       </div>
       <div class="hero-badge">
-        <span>本地保存</span>
-        <strong>JSON备份</strong>
+        <span>服务器保存</span>
+        <strong>SQLite</strong>
       </div>
     </div>
   </header>
@@ -28,7 +28,7 @@
           <p class="section-kicker">表格菜单</p>
           <h2 id="menuTitle">选择记录表</h2>
         </div>
-        <p class="section-note">点击菜单切换表格。</p>
+        <p class="section-note">点击菜单切换业务表，进入「数据管理」可统一处理全站备份、导入、导出和恢复。</p>
       </div>
       <div id="tableMenu" class="record-menu-grid" aria-label="记录表菜单"></div>
     </section>
@@ -48,19 +48,56 @@
 
       <p id="activeTableNote" class="record-page-note"></p>
 
-      <div class="record-toolbar" aria-label="记录操作区">
+      <div id="recordToolbar" class="record-toolbar" aria-label="记录操作区">
         <button id="addRecordBtn" class="action-btn primary" type="button">新增记录</button>
-        <button id="exportDataBtn" class="action-btn" type="button">导出备份</button>
-        <label class="action-btn file-btn" for="importDataInput">导入备份</label>
-        <input id="importDataInput" class="hidden-file-input" type="file" accept=".json,application/json" />
-        <button id="resetDataBtn" class="action-btn danger-light" type="button">恢复默认模板</button>
+        <button id="refreshDataBtn" class="action-btn" type="button">刷新数据</button>
+      </div>
+
+      <div id="apiStatus" class="api-status loading">正在连接 PHP + SQLite 数据库...</div>
+
+      <div id="dataManagerPanel" class="data-manager-panel" hidden>
+        <div class="data-manager-intro">
+          <div>
+            <p class="section-kicker">Global Backup</p>
+            <h3>全局数据管理</h3>
+            <p>这里管理的是整套 SQLite 数据库，不是单独某一张表。导入、恢复默认模板、从服务器备份恢复都会覆盖全部业务表，系统会在高风险操作前自动生成服务器端备份。</p>
+          </div>
+          <div class="data-manager-badge">
+            <span>备份范围</span>
+            <strong>全部记录表</strong>
+          </div>
+        </div>
+
+        <div class="data-manager-actions" aria-label="全局数据管理操作区">
+          <button id="serverBackupBtn" class="action-btn primary" type="button">生成服务器备份</button>
+          <button id="toggleBackupPanelBtn" class="action-btn" type="button">服务器备份列表</button>
+          <button id="exportDataBtn" class="action-btn" type="button">导出完整 JSON</button>
+          <label class="action-btn file-btn" for="importDataInput">导入 JSON 备份</label>
+          <input id="importDataInput" class="hidden-file-input" type="file" accept=".json,application/json" />
+          <button id="resetDataBtn" class="action-btn danger-light" type="button">恢复默认模板</button>
+        </div>
+
+        <div class="data-manager-warning">
+          <strong>注意：</strong>导入 JSON、恢复默认模板、从服务器备份恢复都会覆盖当前 SQLite 数据库。正式使用前，建议先点击「生成服务器备份」。
+        </div>
+
+        <div id="backupPanel" class="backup-panel" hidden>
+          <div class="backup-panel-head">
+            <div>
+              <strong>服务器端 JSON 备份</strong>
+              <p>备份文件保存在服务器 <code>backups/</code> 目录中。导入、恢复默认模板、从备份恢复前，系统都会先自动生成一份备份。</p>
+            </div>
+            <button id="refreshBackupsBtn" class="mini-btn" type="button">刷新列表</button>
+          </div>
+          <div id="backupList" class="backup-list">正在加载备份列表...</div>
+        </div>
       </div>
 
       <div class="table-wrap" id="tableWrap"></div>
 
-      <div class="edit-tip">
+      <div id="editTip" class="edit-tip">
         <strong>保存提醒：</strong>
-        页面修改会保存到当前浏览器本地，不会自动写回源代码；换电脑、清理浏览器数据或更换浏览器后可能看不到本地修改。重要记录请及时点击“导出备份”，需要恢复时再使用“导入备份”。
+        页面修改会通过 PHP 接口保存到 SQLite 数据库，不再依赖浏览器本地存储。备份、导入、导出和恢复默认模板请进入「数据管理」统一操作。
       </div>
     </section>
   </main>
@@ -85,7 +122,7 @@
   </div>
 
   <footer class="page-footer">
-    <p>网站运维工作记录表 · v1.0.0</p>
+    <p>网站运维工作记录表 · v1.2.1</p>
   </footer>
 
   <script src="js/records-data.js"></script>
